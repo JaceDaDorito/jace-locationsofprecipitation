@@ -1,0 +1,28 @@
+{
+    "name": "LocationsOfPrecipitation",
+    "references": [
+        "GUID:d60799ab2a985554ea1a39cd38695018",
+        "GUID:a44f47cf3ada4435dbc516bad0bc86fe"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Unity.Addressables.dll",
+        "UnityEngine.UI.dll",
+        "Unity.ResourceManager.dll",
+        "RoR2.dll",
+        "HGUnityUtils.dll",
+        "HGCSharpUtils.dll",
+        "BepInEx.dll",
+        "Mono.Cecil.dll",
+        "MonoMod.Utils.dll",
+        "MMHOOK_RoR2.dll",
+        "Unity.TextMeshPro.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,27 @@
+{
+    "name": "LocationsOfPrecipitationEditor",
+    "references": [
+        "GUID:280569ac301428d4d950fdf647900922",
+        "GUID:078963f7677f4ce47b920d40bf671f94",
+        "GUID:48abf88f565f4bb4fb35fbe2385f0894",
+        "GUID:b09075ad964848b41a33f15fd615629b"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Unity.Addressables.dll",
+        "UnityEngine.UI.dll",
+        "Unity.ResourceManager.dll",
+        "RoR2.dll",
+        "HGUnityUtils.dll",
+        "HGCSharpUtils.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
