@@ -18,7 +18,8 @@
         "Unity.ResourceManager.dll",
         "RoR2.dll",
         "HGUnityUtils.dll",
-        "HGCSharpUtils.dll"
+        "HGCSharpUtils.dll",
+        "Assembly-CSharp.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
