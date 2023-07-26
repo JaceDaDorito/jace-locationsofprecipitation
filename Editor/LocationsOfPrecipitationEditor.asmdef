@@ -19,7 +19,8 @@
         "RoR2.dll",
         "HGUnityUtils.dll",
         "HGCSharpUtils.dll",
-        "Assembly-CSharp.dll"
+        "Assembly-CSharp.dll",
+        "LegacyResourcesAPI.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
