@@ -7,8 +7,9 @@ A stage modding toolkit that streamlines addressable asset usability in a scene.
 ![ ](https://i.imgur.com/8621jVm.png)
 ![ ]( https://i.imgur.com/sGoGYqJ.png)
 - ``CameraInstantiator`` is an editor only script that injects the RoR2 camera into your scene when hitting Play. This can be used to preview post processing. Building the scene with this script will have no effect in runtime.
-- ``SurfaceDefInjector`` quickly injects ``SurfaceDefs`` into any ``SurfaceDefProviders`` attatched to any children. (May need some work)
+- ``SurfaceDefInjector`` quickly injects ``SurfaceDefs`` into any ``SurfaceDefProviders`` attatched to any children.
 ## Credits
 - Initial scripts by IDeathHD / Quentin
 - Polish and cleaner editor functionality by Nebby
 - Testing and implementation by JaceDaDorito
+- Icon art by JaceDaDorito and IbanPlay
