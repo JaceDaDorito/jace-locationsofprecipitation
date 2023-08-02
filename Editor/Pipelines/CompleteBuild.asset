@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 1
   OverrideManifest: 1
-  targetpipeline: {fileID: 11400000}
+  targetpipeline: {fileID: 11400000, guid: 55e1687284911644488eefce1ddcc9cb, type: 2}
 --- !u!114 &-3444799793181229849
 MonoBehaviour:
   m_ObjectHideFlags: 0
