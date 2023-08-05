@@ -7,11 +7,11 @@ using UnityEngine;
 
 namespace LOP
 {
-    internal class PSTLog
+    internal class LOPLog
     {
         private static ManualLogSource logger = null;
 
-        internal PSTLog(ManualLogSource logger_)
+        internal LOPLog(ManualLogSource logger_)
         {
             logger = logger_;
         }

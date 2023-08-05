@@ -28,7 +28,7 @@ namespace LOP
             PluginInfo = Info;
 
             Logger = base.Logger;
-            new PSTLog(Logger);
+            new LOPLog(Logger);
         }
     }
 }

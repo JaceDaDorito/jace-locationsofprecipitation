@@ -25,7 +25,7 @@ namespace LOP
         {
             if (string.IsNullOrWhiteSpace(surfaceDefAddress) || string.IsNullOrEmpty(surfaceDefAddress))
             {
-                PSTLog.Warning($"Invalid address in {this}, address is null, empty, or white space");
+                LOPLog.Warning($"Invalid address in {this}, address is null, empty, or white space");
                 return;
             }
 

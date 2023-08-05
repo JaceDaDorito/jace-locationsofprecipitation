@@ -39,7 +39,7 @@ namespace LOP
             {
 #if DEBUG
                 string msg = $"Invalid address in {this}, address is null, empty, or white space";
-                PSTLog.Warning(msg);
+                LOPLog.Warning(msg);
 #endif
                 return;
             }
@@ -48,7 +48,7 @@ namespace LOP
             {
 #if DEBUG
                 string msg = $"No Target Component Set in {this}";
-                PSTLog.Warning(msg);
+                LOPLog.Warning(msg);
 #endif
                 return;
             }
@@ -57,7 +57,7 @@ namespace LOP
             {
 #if DEBUG
                 string msg = $"{this}'s targetMemberInfoName is null, empty or white space";
-                PSTLog.Warning(msg);
+                LOPLog.Warning(msg);
 #endif
                 return;
             }
@@ -67,7 +67,7 @@ namespace LOP
             {
 #if DEBUG
                 string msg = $"{this} failed finding the MemberInfo to target based on the name \"{targetMemberInfoName}\". Target Component: {targetComponent}";
-                PSTLog.Warning(msg); ;
+                LOPLog.Warning(msg); ;
 #endif
                 return;
             }
@@ -100,11 +100,11 @@ namespace LOP
                 }
                 catch (Exception e)
                 {
-                    PSTLog.Error(e);
+                    LOPLog.Error(e);
                 }
 
 #if UNITY_EDITOR
-                PSTLog.Info($"injected {Asset} onto {targetComponent}'s propertyInfo, setting propertyInfo value to null to avoid broken scenes/objects");
+                LOPLog.Info($"injected {Asset} onto {targetComponent}'s propertyInfo, setting propertyInfo value to null to avoid broken scenes/objects");
                 propertyInfo.SetValue(targetComponent, null);
                 DestroyImmediate(Asset);
 #endif
@@ -118,11 +118,11 @@ namespace LOP
                 }
                 catch (Exception e)
                 {
-                    PSTLog.Error(e);
+                    LOPLog.Error(e);
                 }
 
 #if UNITY_EDITOR
-                PSTLog.Info($"injected {Asset} onto {targetComponent}'s fieldInfo, setting fieldInfo value to null to avoid broken scenes/objects");
+                LOPLog.Info($"injected {Asset} onto {targetComponent}'s fieldInfo, setting fieldInfo value to null to avoid broken scenes/objects");
                 fieldInfo.SetValue(targetComponent, null);
                 DestroyImmediate(Asset);
 #endif

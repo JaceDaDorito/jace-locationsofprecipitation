@@ -23,7 +23,7 @@ namespace LOP
         {
             if (Application.isPlaying && !Application.isEditor)
             {
-                PSTLog.Fatal($"Lingering camera injector in {gameObject}, Ensure that these scripts are NOT present on finalized builds!!!");
+                LOPLog.Fatal($"Lingering camera injector in {gameObject}, Ensure that these scripts are NOT present on finalized builds!!!");
                 Destroy(gameObject);
                 return;
             }
