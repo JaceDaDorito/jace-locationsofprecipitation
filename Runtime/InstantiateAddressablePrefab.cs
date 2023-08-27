@@ -8,7 +8,7 @@ namespace LOP
     /// Instantiates the prefab specified in <see cref="address"/>
     /// </summary>
     [ExecuteAlways]
-    public abstract class InstantiateAddressablePrefab : MonoBehaviour
+    public class InstantiateAddressablePrefab : MonoBehaviour
     {
         [Tooltip("The address to use to load the prefab")]
         [SerializeField] private string address;

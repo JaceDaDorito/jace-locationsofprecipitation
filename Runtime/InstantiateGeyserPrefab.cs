@@ -42,9 +42,6 @@ namespace LOP
         [NonSerialized]
         private GameObject instance;
 
-        public JumpVolume InstanceJV => instanceJV;
-        [NonSerialized]
-        private JumpVolume instanceJV;
 
         private void OnEnable() => Refresh();
         private void OnDisable()
@@ -93,16 +90,14 @@ namespace LOP
             GameObject prefab = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>(address).WaitForCompletion();
             instance = Instantiate(prefab, transform);
 
-            JumpVolume jVolOg = gameObject.GetComponent<JumpVolume>();
-            JumpVolume jVolInstance = instance.GetComponentInChildren<JumpVolume>();
-            Transform jVolInstanceTr = jVolInstance.transform;
-            jVolInstance.enabled = false;
-
-            if (!Application.isEditor)
-            {
-                instanceJV = Instantiate(jVolOg, jVolInstanceTr);
-                jVolOg.enabled = false;
-            }
+            JumpVolume jVolOG = gameObject.GetComponent<JumpVolume>();
+            JumpVolume jVolIn = instance.GetComponentInChildren<JumpVolume>();
+            jVolIn.targetElevationTransform = jVolOG.targetElevationTransform;
+            jVolIn.jumpVelocity = jVolOG.jumpVelocity;
+            jVolIn.time = jVolOG.time;
+            jVolIn.jumpSoundString = jVolOG.jumpSoundString;
+            jVolIn.onJump = jVolOG.onJump;
+            jVolOG.enabled = false;
 
             instance.hideFlags |= HideFlags.DontSaveInEditor | HideFlags.DontSaveInBuild | HideFlags.NotEditable;
             foreach (Transform t in instance.GetComponentsInChildren<Transform>())

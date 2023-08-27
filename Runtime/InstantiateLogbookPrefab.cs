@@ -27,10 +27,6 @@ namespace LOP
         [NonSerialized]
         private GameObject instance;
 
-        public VelocityRandomOnStart InstanceVROS => instanceVROS;
-        [NonSerialized]
-        private VelocityRandomOnStart instanceVROS; 
-
         private void OnEnable() => Refresh();
         private void OnDisable()
         {
@@ -81,11 +77,18 @@ namespace LOP
             t.localPosition = Vector3.zero;
             t.localRotation = Quaternion.identity;
 
-            VelocityRandomOnStart velRandomOg = gameObject.GetComponent<VelocityRandomOnStart>();
-            VelocityRandomOnStart velRandomInstance = instance.GetComponent<VelocityRandomOnStart>();
-            velRandomInstance.enabled = false;
-            instanceVROS = Instantiate(velRandomOg, instance.transform);
-            velRandomOg.enabled = false;
+            VelocityRandomOnStart velOG = gameObject.GetComponent<VelocityRandomOnStart>();
+            VelocityRandomOnStart velIn = instance.GetComponent<VelocityRandomOnStart>();
+            velIn.minSpeed = velOG.minSpeed;
+            velIn.maxSpeed = velOG.maxSpeed;
+            velIn.baseDirection = velOG.baseDirection;
+            velIn.localDirection = velOG.localDirection;
+            velIn.directionMode = velOG.directionMode;
+            velIn.coneAngle = velOG.coneAngle;
+            velIn.minAngularSpeed = velOG.minAngularSpeed;
+            velIn.maxAngularSpeed = velOG.maxAngularSpeed;
+            velOG.enabled = false;
+
 
             Rigidbody rb = instance.GetComponent<Rigidbody>();
             rb.useGravity = enableGravity;
