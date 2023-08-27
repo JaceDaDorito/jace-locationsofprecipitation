@@ -31,7 +31,10 @@ namespace LOP
         [SerializeField] private bool useLocalPositionAndRotation;
         [Tooltip("Wether the Refresh method will be called in the editor")]
         [SerializeField] private bool refreshInEditor;
+        [Tooltip("Wether the sound string remains the same as the original instance")]
+        [SerializeField] private bool conserveSoundString;
         [SerializeField, HideInInspector] private bool hasNetworkIdentity;
+
 
         private string address;
 
@@ -95,7 +98,8 @@ namespace LOP
             jVolIn.targetElevationTransform = jVolOG.targetElevationTransform;
             jVolIn.jumpVelocity = jVolOG.jumpVelocity;
             jVolIn.time = jVolOG.time;
-            jVolIn.jumpSoundString = jVolOG.jumpSoundString;
+            if(!conserveSoundString)
+                jVolIn.jumpSoundString = jVolOG.jumpSoundString;
             jVolIn.onJump = jVolOG.onJump;
             jVolOG.enabled = false;
 
