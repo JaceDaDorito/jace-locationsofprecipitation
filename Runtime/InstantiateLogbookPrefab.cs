@@ -27,6 +27,10 @@ namespace LOP
         [NonSerialized]
         private GameObject instance;
 
+        public VelocityRandomOnStart InstanceVROS => instanceVROS;
+        [NonSerialized]
+        private VelocityRandomOnStart instanceVROS; 
+
         private void OnEnable() => Refresh();
         private void OnDisable()
         {
@@ -79,8 +83,8 @@ namespace LOP
 
             VelocityRandomOnStart velRandomOg = gameObject.GetComponent<VelocityRandomOnStart>();
             VelocityRandomOnStart velRandomInstance = instance.GetComponent<VelocityRandomOnStart>();
-            Destroy(velRandomInstance);
-            Instantiate(velRandomOg, instance.transform);
+            velRandomInstance.enabled = false;
+            instanceVROS = Instantiate(velRandomOg, instance.transform);
             velRandomOg.enabled = false;
 
             Rigidbody rb = instance.GetComponent<Rigidbody>();

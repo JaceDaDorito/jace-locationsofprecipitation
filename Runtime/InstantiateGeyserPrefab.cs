@@ -42,6 +42,10 @@ namespace LOP
         [NonSerialized]
         private GameObject instance;
 
+        public JumpVolume InstanceJV => instanceJV;
+        [NonSerialized]
+        private JumpVolume instanceJV;
+
         private void OnEnable() => Refresh();
         private void OnDisable()
         {
@@ -92,11 +96,11 @@ namespace LOP
             JumpVolume jVolOg = gameObject.GetComponent<JumpVolume>();
             JumpVolume jVolInstance = instance.GetComponentInChildren<JumpVolume>();
             Transform jVolInstanceTr = jVolInstance.transform;
-            LOPUtil.DestroyImmediateSafe(jVolInstance);
+            jVolInstance.enabled = false;
 
             if (!Application.isEditor)
             {
-                Instantiate(jVolOg, jVolInstanceTr);
+                instanceJV = Instantiate(jVolOg, jVolInstanceTr);
                 jVolOg.enabled = false;
             }
 
