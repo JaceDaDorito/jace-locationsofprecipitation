@@ -6,8 +6,9 @@ using RoR2;
 namespace LOP
 {
     /// <summary>
-    /// Instantiates a Logbook Pickup given an Unlockable. Attatching a VelocityRandomOnStart to this GameObject will transfer those values to the logbook.
+    /// Instantiates a Logbook Pickup given an Unlockable.
     /// </summary>
+    [RequireComponent(typeof(VelocityRandomOnStart))]
     public class InstantiateLogbookPrefab : MonoBehaviour
     {
         [Tooltip("The unlock that triggers when the prefab is picked up.")]
@@ -79,11 +80,8 @@ namespace LOP
             VelocityRandomOnStart velRandomOg = gameObject.GetComponent<VelocityRandomOnStart>();
             VelocityRandomOnStart velRandomInstance = instance.GetComponent<VelocityRandomOnStart>();
             Destroy(velRandomInstance);
-            if (velRandomOg)
-            {
-                Instantiate(velRandomOg, instance.transform);
-                velRandomOg.enabled = false;
-            }
+            Instantiate(velRandomOg, instance.transform);
+            velRandomOg.enabled = false;
 
             Rigidbody rb = instance.GetComponent<Rigidbody>();
             rb.useGravity = enableGravity;
