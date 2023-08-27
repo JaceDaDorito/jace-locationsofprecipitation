@@ -5,8 +5,12 @@ using RoR2;
 
 namespace LOP
 {
-    [RequireComponent(typeof(JumpVolume))]
+    /// <summary>
+    /// Instantiates the geyser specified in <see cref="geyserType"/>
+    /// </summary>
     [ExecuteAlways]
+    [RequireComponent(typeof(JumpVolume))]
+    
     public class InstantiateGeyserPrefab : MonoBehaviour
     {
         private enum GeyserType
@@ -42,9 +46,12 @@ namespace LOP
         private void OnDisable()
         {
             if (instance)
-                Destroy(instance);
+                LOPUtil.DestroyImmediateSafe(instance);
         }
 
+        /// <summary>
+        /// Destroys the instantiated object and re-instantiates using the prefab that's loaded via <see cref="geyserType"/>
+        /// </summary>
         public void Refresh()
         {
             if (Application.isEditor && !refreshInEditor)
@@ -52,7 +59,7 @@ namespace LOP
 
             if (instance)
             {
-                Destroy(instance);
+                LOPUtil.DestroyImmediateSafe(instance);
             }
 
             switch((int)geyserType){
@@ -82,6 +89,17 @@ namespace LOP
             GameObject prefab = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>(address).WaitForCompletion();
             instance = Instantiate(prefab, transform);
 
+            JumpVolume jVolOg = gameObject.GetComponent<JumpVolume>();
+            JumpVolume jVolInstance = instance.GetComponentInChildren<JumpVolume>();
+            Transform jVolInstanceTr = jVolInstance.transform;
+            LOPUtil.DestroyImmediateSafe(jVolInstance);
+
+            if (!Application.isEditor)
+            {
+                Instantiate(jVolOg, jVolInstanceTr);
+                jVolOg.enabled = false;
+            }
+
             instance.hideFlags |= HideFlags.DontSaveInEditor | HideFlags.DontSaveInBuild | HideFlags.NotEditable;
             foreach (Transform t in instance.GetComponentsInChildren<Transform>())
             {
@@ -101,12 +119,6 @@ namespace LOP
                 }
             }
 
-            JumpVolume jVolOg = gameObject.GetComponent<JumpVolume>();
-            JumpVolume jVolInstance = instance.GetComponentInChildren<JumpVolume>();
-            Transform jVolInstanceTr = jVolInstance.transform;
-
-            Instantiate(jVolOg, jVolInstanceTr);
-            jVolOg.enabled = false;
         }
     }
 }
