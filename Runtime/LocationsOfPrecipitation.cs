@@ -13,7 +13,7 @@ namespace LOP
 
         public const string Name = nameof(LocationsOfPrecipitation);
 
-        public const string Version = "1.0.0";
+        public const string Version = "1.1.0";
 
         public const string GUID = Author + "." + Name;
 

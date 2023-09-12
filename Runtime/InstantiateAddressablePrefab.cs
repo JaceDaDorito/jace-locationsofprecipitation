@@ -13,11 +13,11 @@ namespace LOP
         [Tooltip("The address to use to load the prefab")]
         [SerializeField] private string address;
         [Tooltip("When the prefab is instantiated, and this is true, the prefab's position and rotation will be set to 0")]
-        [SerializeField] private bool setPositionAndRotationToZero;
+        [SerializeField] private bool setPositionAndRotationToZero = true;
         [Tooltip("setPositionAndRotationToZero would work relative to it's parent")]
-        [SerializeField] private bool useLocalPositionAndRotation;
+        [SerializeField] private bool useLocalPositionAndRotation = true;
         [Tooltip("Wether the Refresh method will be called in the editor")]
-        [SerializeField] private bool refreshInEditor;
+        [SerializeField] private bool refreshInEditor = true;
         [SerializeField, HideInInspector] private bool hasNetworkIdentity;
 
         /// <summary>
