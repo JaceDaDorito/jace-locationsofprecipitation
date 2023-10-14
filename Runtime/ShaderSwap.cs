@@ -25,8 +25,8 @@ namespace LOP
                 cachedCloudRemapMaterial = await cloudMatAsyncOp.Task;
             }
 
-            string shaderName = material.shader.name.Substring("Stubbed".Length);
-            string addressablePath = $"{shaderName}.shader";
+            var shaderName = material.shader.name.Substring("Stubbed".Length);
+            var addressablePath = $"{shaderName}.shader";
             if (cachedShaderDict.ContainsKey(addressablePath))
             {
                 material.shader = cachedShaderDict[addressablePath];
@@ -35,7 +35,7 @@ namespace LOP
             {
                 var asyncOp = Addressables.LoadAssetAsync<Shader>(addressablePath);
                 var shaderTask = asyncOp.Task;
-                Shader shader = await shaderTask;
+                var shader = await shaderTask;
                 cachedShaderDict.Add(addressablePath, shader);
                 material.shader = shader;
             }
