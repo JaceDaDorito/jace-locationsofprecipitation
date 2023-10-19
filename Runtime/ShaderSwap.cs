@@ -25,11 +25,13 @@ namespace LOP
                 cachedCloudRemapMaterial = await cloudMatAsyncOp.Task;
             }
 
+            LOPLog.Debug(material.shader.name);
             var shaderName = material.shader.name.Substring("Stubbed".Length);
             var addressablePath = $"{shaderName}.shader";
             if (cachedShaderDict.ContainsKey(addressablePath))
             {
                 material.shader = cachedShaderDict[addressablePath];
+                LOPLog.Debug(material.shader.name);
             }
             else
             {
