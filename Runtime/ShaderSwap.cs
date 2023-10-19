@@ -27,7 +27,9 @@ namespace LOP
 
             LOPLog.Debug(material.shader.name);
             var shaderName = material.shader.name.Substring("Stubbed".Length);
+            LOPLog.Debug(shaderName);
             var addressablePath = $"{shaderName}.shader";
+            LOPLog.Debug(addressablePath);
             if (cachedShaderDict.ContainsKey(addressablePath))
             {
                 material.shader = cachedShaderDict[addressablePath];
