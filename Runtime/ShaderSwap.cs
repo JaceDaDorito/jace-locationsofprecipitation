@@ -25,33 +25,43 @@ namespace LOP
                 cachedCloudRemapMaterial = await cloudMatAsyncOp.Task;
             }
 
-            LOPLog.Debug(material.shader.name);
-            var shaderName = material.shader.name.Substring("Stubbed".Length);
-            LOPLog.Debug(shaderName);
-            var addressablePath = $"{shaderName}.shader";
-            LOPLog.Debug(addressablePath);
-            if (cachedShaderDict.ContainsKey(addressablePath))
+            if (!material.shader.name.StartsWith("Stubbed"))
             {
-                material.shader = cachedShaderDict[addressablePath];
-                LOPLog.Debug(material.shader.name);
-            }
-            else
-            {
-                var asyncOp = Addressables.LoadAssetAsync<Shader>(addressablePath);
-                var shaderTask = asyncOp.Task;
-                var shader = await shaderTask;
-                cachedShaderDict.Add(addressablePath, shader);
-                material.shader = shader;
-            }
-            
-            if (material.shader.name.Contains("Cloud Remap"))
-            {
-                var remapper = new RuntimeCloudMaterialMapper(material);
-                material.CopyPropertiesFromMaterial(cachedCloudRemapMaterial);
-                remapper.SetMaterialValues(ref material);
+                LOPLog.Warning($"The material {material} has a shader which's name doesnt start with \"Stubbed\". Skipping material.");
+
+                return;
             }
 
-            MaterialsWithSwappedShaders.Add(material);
+            try
+            {
+                var shaderName = material.shader.name.Substring("Stubbed".Length);
+                var addressablePath = $"{shaderName}.shader";
+                if (cachedShaderDict.ContainsKey(addressablePath))
+                {
+                    material.shader = cachedShaderDict[addressablePath];
+                }
+                else
+                {
+                    var asyncOp = Addressables.LoadAssetAsync<Shader>(addressablePath);
+                    var shaderTask = asyncOp.Task;
+                    var shader = await shaderTask;
+                    cachedShaderDict.Add(addressablePath, shader);
+                    material.shader = shader;
+                }
+
+                if (material.shader.name.Contains("Cloud Remap"))
+                {
+                    var remapper = new RuntimeCloudMaterialMapper(material);
+                    material.CopyPropertiesFromMaterial(cachedCloudRemapMaterial);
+                    remapper.SetMaterialValues(ref material);
+                }
+
+                MaterialsWithSwappedShaders.Add(material);
+            }
+            catch (Exception ex)
+            {
+                LOPLog.Error($"Failed to swap shader of material {material}: {ex}");
+            }
         }
     }
 
