@@ -8,14 +8,13 @@ namespace LOP
 {
     public static class ShaderSwap
     {
-        private static Dictionary<string, Shader> cachedShaderDict = new Dictionary<string, Shader>();
         public static List<Material> MaterialsWithSwappedShaders { get; } = new List<Material>();
 
         private static Material cachedCloudRemapMaterial;
-        static ShaderSwap()
+        /*static ShaderSwap()
         {
             RoR2.RoR2Application.onLoad = (Action)Delegate.Combine(RoR2Application.onLoad, new Action(() => cachedShaderDict.Clear()));
-        }
+        }*/
 
         public static async void SwapShader(Material material)
         {
@@ -36,18 +35,10 @@ namespace LOP
             {
                 var shaderName = material.shader.name.Substring("Stubbed".Length);
                 var addressablePath = $"{shaderName}.shader";
-                if (cachedShaderDict.ContainsKey(addressablePath))
-                {
-                    material.shader = cachedShaderDict[addressablePath];
-                }
-                else
-                {
-                    var asyncOp = Addressables.LoadAssetAsync<Shader>(addressablePath);
-                    var shaderTask = asyncOp.Task;
-                    var shader = await shaderTask;
-                    cachedShaderDict.Add(addressablePath, shader);
-                    material.shader = shader;
-                }
+                var asyncOp = Addressables.LoadAssetAsync<Shader>(addressablePath);
+                var shaderTask = asyncOp.Task;
+                var shader = await shaderTask;
+                material.shader = shader;
 
                 if (material.shader.name.Contains("Cloud Remap"))
                 {
