@@ -10,16 +10,8 @@ namespace LOP
     {
         public static List<Material> MaterialsWithSwappedShaders { get; } = new List<Material>();
 
-        private static Material cachedCloudRemapMaterial;
-
         public static async void SwapShader(Material material)
         {
-            if (!cachedCloudRemapMaterial)
-            {
-                var cloudMatAsyncOp = Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matLightningLongBlue.mat");
-                cachedCloudRemapMaterial = await cloudMatAsyncOp.Task;
-            }
-
             if (!material.shader.name.StartsWith("Stubbed"))
             {
                 LOPLog.Warning($"The material {material} has a shader which's name doesnt start with \"Stubbed\". Skipping material.");
