@@ -40,12 +40,12 @@ namespace LOP
                 var shader = await shaderTask;
                 material.shader = shader;
 
-                if (material.shader.name.Contains("Cloud Remap"))
+                /*if (material.shader.name.Contains("Cloud Remap"))
                 {
                     var remapper = new RuntimeCloudMaterialMapper(material);
                     material.CopyPropertiesFromMaterial(cachedCloudRemapMaterial);
                     remapper.SetMaterialValues(ref material);
-                }
+                }*/
 
                 MaterialsWithSwappedShaders.Add(material);
             }
