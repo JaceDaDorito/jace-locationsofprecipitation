@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -10,7 +11,7 @@ namespace LOP
     {
         public static List<Material> MaterialsWithSwappedShaders { get; } = new List<Material>();
 
-        public static async void SwapShader(Material material)
+        public static async Task ConvertShader(Material material)
         {
             if (!material.shader.name.StartsWith("Stubbed"))
             {
@@ -21,7 +22,7 @@ namespace LOP
 
             try
             {
-                var shaderName = material.shader.name.Substring("Stubbed".Length);
+                var shaderName = material.shader.name.Substring(7);
                 var addressablePath = $"{shaderName}.shader";
                 var asyncOp = Addressables.LoadAssetAsync<Shader>(addressablePath);
                 var shaderTask = asyncOp.Task;
