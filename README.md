@@ -8,8 +8,12 @@ A stage modding toolkit that streamlines addressable asset usability in a scene.
 ![ ](https://i.imgur.com/sGoGYqJ.png)
 - ``CameraInstantiator`` is an editor only script that injects the RoR2 camera into your scene. This can be used to preview post processing. Building the scene with this script will have no effect in runtime.
 ![ ](https://i.imgur.com/4IcbNNF.png)
-
 - ``SurfaceDefInjector`` quickly injects ``SurfaceDefs`` into any ``SurfaceDefProviders`` attatched to any children.
+- A Geyser Menu item under ``Risk of Rain 2``.
+- ``InstantiateGeyserPrefab`` which allows you to instantiate and configure most of RoR2's jump pads.
+![](https://i.imgur.com/XZqDqxS.png)
+- ``InstantiateLogbookPrefab`` which allows you to instantiate and configure a logbook pickup prefab.
+![](https://i.imgur.com/ZJj07nv.png)
 ## Credits
 - Initial scripts by IDeathHD / Quentin
 - Polish and cleaner editor functionality by Nebby

@@ -4,7 +4,7 @@
 - Added ``InstantiateGeyserPrefab`` for reusing in game geysers.
 - Added ``InstantiateLogbookPrefab`` for instantiating the logbook pickup usually found on hidden realms.
 - Made ``Set Position And Rotation to Zero``, ``Use Local Position and Rotation``, and ``Refresh in Editor`` all set to true by default.
-- Added ``ShaderSwap`` class with ``SwapShader`` method.
+- Added ``ShaderSwap`` class with ``ConvertShader`` method.
 
 **1.0.0**
 
