@@ -68,22 +68,25 @@ namespace LOP
                 instance = Instantiate(prefab, transform);
             }
 
-            instance.hideFlags |= HideFlags.DontSaveInEditor | HideFlags.DontSaveInBuild | HideFlags.NotEditable;
-            foreach (Transform t in instance.GetComponentsInChildren<Transform>())
+            if(instance) 
             {
-                t.gameObject.hideFlags = instance.hideFlags;
-            }
-            if (setPositionAndRotationToZero)
-            {
-                Transform t = instance.transform;
-                if (useLocalPositionAndRotation)
+                instance.hideFlags |= HideFlags.DontSaveInEditor | HideFlags.DontSaveInBuild | HideFlags.NotEditable;
+                foreach (Transform t in instance.GetComponentsInChildren<Transform>())
                 {
-                    t.localPosition = Vector3.zero;
-                    t.localRotation = Quaternion.identity;
+                    t.gameObject.hideFlags = instance.hideFlags;
                 }
-                else
+                if (setPositionAndRotationToZero)
                 {
-                    t.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+                    Transform t = instance.transform;
+                    if (useLocalPositionAndRotation)
+                    {
+                        t.localPosition = Vector3.zero;
+                        t.localRotation = Quaternion.identity;
+                    }
+                    else
+                    {
+                        t.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+                    }
                 }
             }
         }
