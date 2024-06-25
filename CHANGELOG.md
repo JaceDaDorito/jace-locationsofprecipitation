@@ -1,3 +1,6 @@
+**1.1.1**
+- Implemented nullcheck before setting flags of prefab instances in InstantiateAddressablePrefab.
+
 **1.1.0**
 - Added new GameObject Menu item called ``Risk of Rain 2``.
 - New ``Geyser`` prefab option under ``Risk of Rain 2`` menu Item. Used to quickly make custom jump pads.
