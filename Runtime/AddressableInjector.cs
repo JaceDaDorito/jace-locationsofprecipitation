@@ -138,7 +138,7 @@ namespace LOP
                     .Where(m =>
                     {
                         string memberTypeName = m.GetType().Name;
-                        return memberTypeName == "MonoProperty" || memberTypeName == "MonoField" || memberTypeName == "FieldInfo" || memberTypeName == "PropertyInfo";
+                        return memberTypeName.Contains("Property") || memberTypeName.Contains("Field");
                     })
                     .FirstOrDefault(m => $"({m.DeclaringType.Name}) {m.Name}" == targetMemberInfoName);
             }
