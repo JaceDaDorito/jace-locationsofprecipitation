@@ -1,20 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6074287811390394684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50df4f9027e15e04b931a8d460fb22c5, type: 3}
-  m_Name: ExecutePipeline
-  m_EditorClassIdentifier: 
-  Active: 1
-  OverrideManifest: 1
-  targetpipeline: {fileID: 11400000, guid: 55e1687284911644488eefce1ddcc9cb, type: 2}
 --- !u!114 &-3444799793181229849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,6 +29,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
   - {fileID: -3444799793181229849}
-  - {fileID: -6074287811390394684}
   QuickAccess: 0
   manifest: {fileID: 0}

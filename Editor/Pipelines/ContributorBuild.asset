@@ -20,7 +20,7 @@ MonoBehaviour:
   Recursive: 1
   SourceRequired: 0
   EstablishDestination: 1
-  Source: <BuildPath>
+  Source: <LOP_BuildPath>
   Destination: 
 --- !u!114 &11400000
 MonoBehaviour:

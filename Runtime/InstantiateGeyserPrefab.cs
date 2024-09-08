@@ -22,7 +22,11 @@ namespace LOP
             Aphelian = 3,
             Siphoned = 4,
             Void = 5,
-            Fan = 6
+            Fan = 6,
+            Shroom = 7,
+            Meridian = 8/*,
+            Verdant = 9,
+            Helminth = 10*/
         }
 
         [Tooltip("The prefab used for the geyser")]
@@ -88,7 +92,7 @@ namespace LOP
                     address = "RoR2/Base/moon/MoonGeyser.prefab";
                     break;
                 case 3:
-                    address = "RoR2/DLC1/ancientloft/AncientLoft_Geyser.prefab";
+                    address = "RoR2/DLC1/ancientloft/AL_Geyser.prefab";
                     break;
                 case 4:
                     address = "RoR2/DLC1/snowyforest/SFGeyser.prefab";
@@ -97,7 +101,19 @@ namespace LOP
                     address = "RoR2/DLC1/voidstage/mdlVoidGravityGeyser.prefab";
                     break;
                 case 6:
-                    address = "RoR2/Base/frozenwall/HumanFan.prefab";
+                    address = "RoR2/Base/frozenwall/FW_HumanFan.prefab";
+                    break;
+                case 7:
+                    address = "RoR2/Base/rootjungle/RJ_BounceShroom.prefab";
+                    break;
+                case 8:
+                    address = "RoR2/DLC2/meridian/PMLaunchPad.prefab";
+                    break;
+                case 9:
+                    address = "RoR2/DLC2/lakes/Assets/TLJumpPad.prefab";
+                    break;
+                case 10:
+                    address = "RoR2/DLC2/helminthroost/Assets/HRLaunchPad.prefab";
                     break;
                 default:
                     LOPLog.Error($"This isn't supposed to print in {this}. Geyser Type is invalid.");

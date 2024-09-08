@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AssemblyDefinitions
   m_EditorClassIdentifier: 
   StagingPaths:
-  - <BuildPathPlugins>
+  - <LOP_BuildPathPlugins>
   definitions:
   - {fileID: 5897886265953266890, guid: b09075ad964848b41a33f15fd615629b, type: 3}
 --- !u!114 &-3047459398258836019
@@ -29,7 +29,7 @@ MonoBehaviour:
   m_Name: ThunderstoreData
   m_EditorClassIdentifier: 
   StagingPaths:
-  - <BuildPath>
+  - <LOP_BuildPath>
   url: https://github.com/JaceDaDorito/jace-locationsofprecipitation
 --- !u!114 &11400000
 MonoBehaviour:
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Name: Files
   m_EditorClassIdentifier: 
   StagingPaths:
-  - <BuildPath>
+  - <LOP_BuildPath>
   includeMetaFiles: 0
   files:
   - {fileID: 4900000, guid: ceb1b2cac208cea4dbcb6ce64efb8210, type: 3}
