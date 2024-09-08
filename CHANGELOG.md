@@ -1,3 +1,7 @@
+**1.1.2**
+- Updated for SoTS!
+- Added ``Shroom`` and ``Meridian`` jump pads. Will add the other DLC jump pads in the future but there is an issue with them saving into the scene causing GUID errors.
+
 **1.1.1**
 - Implemented nullcheck before setting flags of prefab instances in InstantiateAddressablePrefab.
 
