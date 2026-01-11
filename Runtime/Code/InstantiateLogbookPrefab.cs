@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using RoR2;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.AddressableAssets;
 
 namespace LOP
 {
@@ -23,15 +25,27 @@ namespace LOP
         /// <summary>
         /// The instantiated prefab
         /// </summary>
-        public GameObject Instance => instance;
-        [NonSerialized]
-        private GameObject instance;
+        [field: NonSerialized]
+        public GameObject Instance { get; private set; }
 
+        private AsyncOperationHandle<GameObject> _asyncOperationHandle;
         private void OnEnable() => Refresh();
         private void OnDisable()
         {
-            if (instance)
-                GameObject.Destroy(instance);
+            DestroyAndReleaseInstance();
+        }
+
+        private void DestroyAndReleaseInstance()
+        {
+            if(Instance)
+            {
+                LOPUtil.DestroyImmediateSafe(Instance);
+            }
+
+            if(_asyncOperationHandle.IsValid())
+            {
+                Addressables.Release(_asyncOperationHandle);
+            }
         }
 
         public void OnDrawGizmos()
@@ -51,8 +65,7 @@ namespace LOP
         /// </summary>
         public void Refresh()
         {
-            if (instance)
-                GameObject.Destroy(instance);
+            DestroyAndReleaseInstance();
 
             if (!unlockableDef)
             {
@@ -66,36 +79,39 @@ namespace LOP
                 return;
             }
 
-            GameObject prefab = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/LogPickup.prefab").WaitForCompletion();
+            //"RoR2/Base/Common/LogPickup.prefab"
+            _asyncOperationHandle = Addressables.LoadAssetAsync<GameObject>("0c5bc9b656c4df344b7da9b8b11ff92b");
+            GameObject prefab = _asyncOperationHandle.WaitForCompletion();
+
             if (NetworkServer.active)
             {
-                instance = Instantiate(prefab, transform);
-                NetworkServer.Spawn(instance);
+                Instance = Instantiate(prefab, transform);
+                NetworkServer.Spawn(Instance);
+                Transform t = Instance.transform;
+                t.localPosition = Vector3.zero;
+                t.localRotation = Quaternion.identity;
+
+                VelocityRandomOnStart velOG = gameObject.GetComponent<VelocityRandomOnStart>();
+                VelocityRandomOnStart velIn = Instance.GetComponent<VelocityRandomOnStart>();
+                velIn.minSpeed = velOG.minSpeed;
+                velIn.maxSpeed = velOG.maxSpeed;
+                velIn.baseDirection = velOG.baseDirection;
+                velIn.localDirection = velOG.localDirection;
+                velIn.directionMode = velOG.directionMode;
+                velIn.coneAngle = velOG.coneAngle;
+                velIn.minAngularSpeed = velOG.minAngularSpeed;
+                velIn.maxAngularSpeed = velOG.maxAngularSpeed;
+                velOG.enabled = false;
+
+
+                Rigidbody rb = Instance.GetComponent<Rigidbody>();
+                rb.useGravity = enableGravity;
+
+                UnlockPickup unlockPickup = Instance.GetComponentInChildren<UnlockPickup>();
+                unlockPickup.displayNameToken = displayNameToken;
+                unlockPickup.unlockableDef = unlockableDef;
             }
 
-            Transform t = instance.transform;
-            t.localPosition = Vector3.zero;
-            t.localRotation = Quaternion.identity;
-
-            VelocityRandomOnStart velOG = gameObject.GetComponent<VelocityRandomOnStart>();
-            VelocityRandomOnStart velIn = instance.GetComponent<VelocityRandomOnStart>();
-            velIn.minSpeed = velOG.minSpeed;
-            velIn.maxSpeed = velOG.maxSpeed;
-            velIn.baseDirection = velOG.baseDirection;
-            velIn.localDirection = velOG.localDirection;
-            velIn.directionMode = velOG.directionMode;
-            velIn.coneAngle = velOG.coneAngle;
-            velIn.minAngularSpeed = velOG.minAngularSpeed;
-            velIn.maxAngularSpeed = velOG.maxAngularSpeed;
-            velOG.enabled = false;
-
-
-            Rigidbody rb = instance.GetComponent<Rigidbody>();
-            rb.useGravity = enableGravity;
-
-            UnlockPickup unlockPickup = instance.GetComponentInChildren<UnlockPickup>();
-            unlockPickup.displayNameToken = displayNameToken;
-            unlockPickup.unlockableDef = unlockableDef;
         }
     }
 }
