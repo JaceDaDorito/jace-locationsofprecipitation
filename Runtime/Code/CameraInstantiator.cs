@@ -1,5 +1,8 @@
-﻿using System;
+﻿using RoR2.ContentManagement;
+using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace LOP
 {
@@ -10,11 +13,25 @@ namespace LOP
     [ExecuteAlways]
     public class CameraInstantiator : MonoBehaviour
     {
-        public const string CAMERA_ADDRESS = "RoR2/Base/Core/Main Camera.prefab";
+        //"RoR2/Base/Core/Camera/Main Camera.prefab"
+        public const string CAMERA_ADDRESS = "55d9d47bebc68734d9e0afdd4d1337ca";
         public GameObject CameraInstance { get => _cameraInstance; private set => _cameraInstance = value; }
-        [NonSerialized] private GameObject _cameraInstance;
+        private GameObject _cameraInstance;
+
+        private AsyncOperationHandle<GameObject> _asyncOperationHandle;
+        
         private void OnEnable() => Refresh();
-        private void OnDisable() => LOPUtil.DestroyImmediateSafe(CameraInstance, true);
+        private void OnDisable()
+        {
+            if(CameraInstance)
+                LOPUtil.DestroyImmediateSafe(CameraInstance, true);
+        
+            //OnEnable calls refresh so the handle has a value there.
+            if(_asyncOperationHandle.IsValid())
+            {
+                Addressables.Release(_asyncOperationHandle);
+            }
+        }
 
         /// <summary>
         /// Instantiates the camera or destroys the attached game object if the component is instantiated at runtime and not in the editor.
@@ -32,7 +49,9 @@ namespace LOP
             {
                 LOPUtil.DestroyImmediateSafe(CameraInstance, true);
             }
-            var go = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>(CAMERA_ADDRESS).WaitForCompletion();
+
+            _asyncOperationHandle = Addressables.LoadAssetAsync<GameObject>(CAMERA_ADDRESS);
+            var go = _asyncOperationHandle.WaitForCompletion();
             CameraInstance = Instantiate(go, transform);
             CameraInstance.name = $"[EDITOR ONLY] {CameraInstance.name}";
             CameraInstance.hideFlags |= HideFlags.DontSaveInEditor | HideFlags.DontSaveInBuild | HideFlags.NotEditable;
