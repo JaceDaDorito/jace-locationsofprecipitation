@@ -1,0 +1,22 @@
+{
+    "name": "LOP.EnsureEditorKit",
+    "rootNamespace": "",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "!EDITORKIT_INSTALLED"
+    ],
+    "versionDefines": [
+        {
+            "name": "riskofthunder-ror2editorkit",
+            "expression": "5.6.0",
+            "define": "EDITORKIT_INSTALLED"
+        }
+    ],
+    "noEngineReferences": false
+}
