@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace LOP
 {
@@ -11,7 +13,10 @@ namespace LOP
     public class InstantiateAddressablePrefab : MonoBehaviour
     {
         [Tooltip("The address to use to load the prefab")]
+        [SerializeField] private AssetReferenceGameObject prefabAddress;
+        [Obsolete]
         [SerializeField] private string address;
+
         [Tooltip("When the prefab is instantiated, and this is true, the prefab's position and rotation will be set to 0")]
         [SerializeField] private bool setPositionAndRotationToZero = true;
         [Tooltip("setPositionAndRotationToZero would work relative to it's parent")]
@@ -23,15 +28,26 @@ namespace LOP
         /// <summary>
         /// The instantiated prefab
         /// </summary>
-        public GameObject Instance => instance;
-        [NonSerialized]
-        private GameObject instance;
+        [field: NonSerialized]
+        public GameObject Instance { get; private set; }
+
+        private AsyncOperationHandle<GameObject> _asyncOperationHandle;
 
         private void OnEnable() => Refresh();
         private void OnDisable()
         {
-            if (instance)
-                LOPUtil.DestroyImmediateSafe(instance, true);
+            DestroyInstanceAndRelease();
+        }
+
+        private void DestroyInstanceAndRelease()
+        {
+            if (Instance)
+                LOPUtil.DestroyImmediateSafe(Instance, true);
+
+            if (_asyncOperationHandle.IsValid())
+            {
+                Addressables.Release(_asyncOperationHandle);
+            }
         }
         /// <summary>
         /// Destroys the instantiated object and re-instantiates using the prefab that's loaded via <see cref="address"/>
@@ -41,54 +57,53 @@ namespace LOP
             if (Application.isEditor && !refreshInEditor)
                 return;
 
-            if (instance)
-            {
-                LOPUtil.DestroyImmediateSafe(instance, true);
-            }
+            DestroyInstanceAndRelease();
 
-            if (string.IsNullOrWhiteSpace(address) || string.IsNullOrEmpty(address))
+            if (prefabAddress.RuntimeKeyIsValid() || string.IsNullOrWhiteSpace(address))
             {
                 LOPLog.Warning($"Invalid address in {this}, address is null, empty, or white space");
                 return;
             }
 
-            GameObject prefab = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>(address).WaitForCompletion();
-            hasNetworkIdentity = prefab.GetComponent<NetworkIdentity>();
+            _asyncOperationHandle = LoadPrefab();
+            GameObject prefab = _asyncOperationHandle.WaitForCompletion();
 
-            if (hasNetworkIdentity && !Application.isEditor)
+            Instance = Instantiate(prefab);
+            if (!Application.isEditor && NetworkServer.active && Instance.TryGetComponent<NetworkIdentity>(out var networkIdentity))
             {
-                if (NetworkServer.active)
-                {
-                    instance = Instantiate(prefab, transform);
-                    NetworkServer.Spawn(instance);
-                }
-            }
-            else
-            {
-                instance = Instantiate(prefab, transform);
+                NetworkServer.Spawn(Instance);
             }
 
-            if(instance) 
+            if(Application.isEditor)
             {
-                instance.hideFlags |= HideFlags.DontSaveInEditor | HideFlags.DontSaveInBuild | HideFlags.NotEditable;
-                foreach (Transform t in instance.GetComponentsInChildren<Transform>())
+                Instance.hideFlags |= HideFlags.DontSaveInEditor | HideFlags.DontSaveInBuild | HideFlags.NotEditable;
+                foreach (Transform t in Instance.GetComponentsInChildren<Transform>())
                 {
-                    t.gameObject.hideFlags = instance.hideFlags;
-                }
-                if (setPositionAndRotationToZero)
-                {
-                    Transform t = instance.transform;
-                    if (useLocalPositionAndRotation)
-                    {
-                        t.localPosition = Vector3.zero;
-                        t.localRotation = Quaternion.identity;
-                    }
-                    else
-                    {
-                        t.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-                    }
+                    t.gameObject.hideFlags = Instance.hideFlags;
                 }
             }
+
+            if (setPositionAndRotationToZero)
+            {
+                Transform t = Instance.transform;
+                if (useLocalPositionAndRotation)
+                {
+                    t.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+                }
+                else
+                {
+                    t.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+                }
+            }
+        }
+
+        private AsyncOperationHandle<GameObject> LoadPrefab()
+        {
+            if(prefabAddress.RuntimeKeyIsValid())
+            {
+                return Addressables.LoadAssetAsync<GameObject>(prefabAddress.RuntimeKey);
+            }
+            return Addressables.LoadAssetAsync<GameObject>(address);
         }
     }
 }
