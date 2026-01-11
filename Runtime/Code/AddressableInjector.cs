@@ -76,6 +76,7 @@ namespace LOP
         /// <summary>
         /// The Loaded Asset
         /// </summary>
+        [field: NonSerialized]
         public Object Asset { get; private set; }
 
         [Tooltip("The component that will be injected")]
