@@ -24,7 +24,15 @@
         "System.Security.dll"
     ],
     "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
+    "defineConstraints": [
+        "ROR2_IMPORTED"
+    ],
+    "versionDefines": [
+        {
+            "name": "riskofrain2",
+            "expression": "0.0.1",
+            "define": "ROR2_IMPORTED"
+        }
+    ],
     "noEngineReferences": false
 }

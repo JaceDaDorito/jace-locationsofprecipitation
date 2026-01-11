@@ -1,9 +1,7 @@
 {
     "name": "LocationsOfPrecipitationEditor",
+    "rootNamespace": "",
     "references": [
-        "GUID:280569ac301428d4d950fdf647900922",
-        "GUID:078963f7677f4ce47b920d40bf671f94",
-        "GUID:48abf88f565f4bb4fb35fbe2385f0894",
         "GUID:b09075ad964848b41a33f15fd615629b"
     ],
     "includePlatforms": [
@@ -23,7 +21,21 @@
         "LegacyResourcesAPI.dll"
     ],
     "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
+    "defineConstraints": [
+        "EDITORKIT_INSTALLED",
+        "ROR2_IMPORTED"
+    ],
+    "versionDefines": [
+        {
+            "name": "riskofrain2",
+            "expression": "0.0.1",
+            "define": "ROR2_IMPORTED"
+        },
+        {
+            "name": "riskofthunder-ror2editorkit",
+            "expression": "5.6.2",
+            "define": "EDITORKIT_INSTALLED"
+        }
+    ],
     "noEngineReferences": false
 }
