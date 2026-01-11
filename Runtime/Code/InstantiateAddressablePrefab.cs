@@ -68,7 +68,7 @@ namespace LOP
             _asyncOperationHandle = LoadPrefab();
             GameObject prefab = _asyncOperationHandle.WaitForCompletion();
 
-            Instance = Instantiate(prefab);
+            Instance = Instantiate(prefab, transform);
             if (!Application.isEditor && NetworkServer.active && Instance.TryGetComponent<NetworkIdentity>(out var networkIdentity))
             {
                 NetworkServer.Spawn(Instance);

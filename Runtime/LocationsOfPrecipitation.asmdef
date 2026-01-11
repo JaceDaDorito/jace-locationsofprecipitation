@@ -21,7 +21,8 @@
         "MonoMod.Utils.dll",
         "MMHOOK_RoR2.dll",
         "Unity.TextMeshPro.dll",
-        "System.Security.dll"
+        "System.Security.dll",
+        "R2API.Addressables.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [
@@ -32,6 +33,11 @@
             "name": "riskofrain2",
             "expression": "0.0.1",
             "define": "ROR2_IMPORTED"
+        },
+        {
+            "name": "riskofthunder-r2api_addressables",
+            "expression": "0.0.1",
+            "define": "R2API_ADDRESSABLES_INSTALLED"
         }
     ],
     "noEngineReferences": false
