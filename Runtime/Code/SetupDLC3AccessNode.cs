@@ -25,6 +25,8 @@ namespace LOP {
         [Tooltip("Ignore Solus Wing defeat.")]
         private bool ignoreSolusWing = false;
 
+        public static Action OnDLC3AccessNodeSetupStart;
+
         [SystemInitializer]
         private static IEnumerator SystemInit()
         {
@@ -69,6 +71,9 @@ namespace LOP {
 
         public void Start()
         {
+            Action onDLC3AccessNodeSetupStart = OnDLC3AccessNodeSetupStart;
+            if (onDLC3AccessNodeSetupStart != null) onDLC3AccessNodeSetupStart();
+
             //Access Node
             GameObject accessNodeAsset = Addressables.LoadAssetAsync<GameObject>(Constants.AssetGUIDS.accessNodeGUID).WaitForCompletion();
             GameObject accessNode = GameObject.Instantiate(accessNodeAsset, this.transform);

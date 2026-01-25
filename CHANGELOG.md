@@ -1,3 +1,6 @@
+**1.2.2**
+- Added a new ``OnDLC3AccessNodeSetupStart`` event that is invoked before ``SetupDLC3AccessNode`` start.
+
 **1.2.1**
 - Added ``SetupDLC3AccessNode``
 
