@@ -37,6 +37,13 @@ namespace LOP
             new LOPLog(Logger);
 
             lopAssetBundle = AssetBundle.LoadFromFile(Path.Combine(AssemblyDir, "runtimelopassetbundle"));
+
+            ContentManager.collectContentPackProviders += ContentManager_collectContentPackProviders;
+        }
+
+        private void ContentManager_collectContentPackProviders(ContentManager.AddContentPackProviderDelegate addContentPackProvider)
+        {
+            addContentPackProvider(new ContentProvider());
         }
     }
 }
