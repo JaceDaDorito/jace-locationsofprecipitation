@@ -27,7 +27,7 @@ namespace LOP
         {
             if(code.Length != 9)
             {
-                Log.Warning("Slab's code lenght is not equal to 9, doing nothing...");
+                LOPLog.Warning($"Slab's code length is not equal to 9, doing nothing...");
                 return;
             }
 

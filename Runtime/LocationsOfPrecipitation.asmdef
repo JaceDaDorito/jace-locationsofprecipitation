@@ -21,7 +21,10 @@
         "MonoMod.Utils.dll",
         "MMHOOK_RoR2.dll",
         "Unity.TextMeshPro.dll",
-        "System.Security.dll"
+        "System.Security.dll",
+        "RoR2BepInExPack.dll",
+        "R2API.Prefab.dll",
+        "R2API.Core.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],

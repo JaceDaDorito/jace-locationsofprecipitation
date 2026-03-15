@@ -1,5 +1,10 @@
+**1.2.2**
+- Added ``InstantiateArtifactPortal`` and ``InstantiateArtifactFormulaDisplay`` to instatiate objects relating to the artifact teleporter in Stage 5s. Does not come with the actual teleporter props.
+- There was an undocumeted feature called ``PlayerSpawnPointController`` in version ``1.2.1`` that remains untested. Added a note to that changelog.
+
 **1.2.1**
 - Added ``SetupDLC3AccessNode``
+- (Untested, please report issues) Added ``PlayerSpawnPointController`` to have more control over player spawn points.
 
 **1.2.0**
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using Path = System.IO.Path;
 using BepInEx.Logging;
 using System.Security.Permissions;
+using RoR2.ContentManagement;
 
 #pragma warning disable CS0618 // Type or member is obsolete
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -19,7 +20,7 @@ namespace LOP
 
         public const string Name = nameof(LocationsOfPrecipitation);
 
-        public const string Version = "1.2.1";
+        public const string Version = "1.2.2";
 
         public const string GUID = Author + "." + Name;
 

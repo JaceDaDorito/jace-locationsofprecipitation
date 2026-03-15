@@ -1,5 +1,4 @@
-﻿using R2API;
-using RoR2;
+﻿using RoR2;
 using RoR2.ContentManagement;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,8 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
+using RoR2BepInExPack.GameAssetPaths;
+using R2API;
 
 namespace LOP
 {
@@ -57,7 +58,7 @@ namespace LOP
             portalDialerController.portalSpawnLocation = portalLocation;
             NetworkServer.Spawn(laptopInstance);
 
-            var portalButtonPrefab = Addressables.LoadAssetAsync<GameObject>(RoR2BepInExPack.GameAssetPaths.Version_1_35_0.RoR2_Base_skymeadow.PortalDialerButton_prefab).WaitForCompletion();
+            var portalButtonPrefab = Addressables.LoadAssetAsync<GameObject>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_skymeadow.PortalDialerButton_prefab).WaitForCompletion();
             for (int i = 0; i < artifactButtons.Length; i++)
             {
                 var newObject = UnityEngine.Object.Instantiate(portalButtonPrefab, artifactButtons[i].position, artifactButtons[i].rotation);
@@ -140,7 +141,7 @@ namespace LOP
 
         public static void CreateAndRegisterLaptop(ContentPack contentPack)
         {
-            var entireIsland = Addressables.LoadAssetAsync<GameObject>(RoR2BepInExPack.GameAssetPaths.Version_1_35_0.RoR2_Base_skymeadow.PortalDialerEvent_prefab).WaitForCompletion();
+            var entireIsland = Addressables.LoadAssetAsync<GameObject>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_skymeadow.PortalDialerEvent_prefab).WaitForCompletion();
             var laptopTransform = entireIsland.transform.Find("Final Zone/ButtonContainer/PortalDialer");
             if (!laptopTransform)
             {
