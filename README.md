@@ -23,4 +23,4 @@ A stage modding toolkit that streamlines addressable asset usability in a scene.
 - Polish and cleaner editor functionality by Nebby
 - Testing and implementation by JaceDaDorito
 - Icon art by JaceDaDorito and IbanPlay
-- Bug fixes by viliger
+- Bug fixes and Artifact dialer utils by viliger
