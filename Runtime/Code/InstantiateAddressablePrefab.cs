@@ -116,6 +116,7 @@ namespace LOP
 
                 if (overrideLocalScale)
                 {
+                    Transform t = instance.transform;
                     t.localScale = newLocalScale;
                 }
             }
