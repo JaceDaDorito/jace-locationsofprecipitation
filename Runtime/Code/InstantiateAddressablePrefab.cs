@@ -14,8 +14,15 @@ namespace LOP
         [SerializeField] private string address;
         [Tooltip("When the prefab is instantiated, and this is true, the prefab's position and rotation will be set to 0")]
         [SerializeField] private bool setPositionAndRotationToZero = true;
-        [Tooltip("setPositionAndRotationToZero would work relative to it's parent")]
+        [Tooltip("When the prefab is instantiated, and this is true, the prefab's position will be set to 0")]
+        [SerializeField] private bool setPositionToZero = true;
+        [Tooltip("When the prefab is instantiated, and this is true, the prefab's rotation will be set to 0")]
+        [SerializeField] private bool setRotationToZero = true;
+        [Tooltip("setPosition/RotationToZero would work relative to it's parent")]
         [SerializeField] private bool useLocalPositionAndRotation = true;
+        [Tooltip("When the prefab is instantiated, and this is true, the prefab's local scale will be set to value of newLocalScale")]
+        [SerializeField] private bool overrideLocalScale;
+        [SerializeField] private Vector3 newLocalScale = Vector3.one;
         [Tooltip("Wether the Refresh method will be called in the editor")]
         [SerializeField] private bool refreshInEditor = true;
         [SerializeField, HideInInspector] private bool hasNetworkIdentity;
@@ -38,13 +45,13 @@ namespace LOP
         /// </summary>
         public void Refresh()
         {
-            if (Application.isEditor && !refreshInEditor)
-                return;
-
             if (instance)
             {
                 LOPUtil.DestroyImmediateSafe(instance, true);
             }
+
+            if (Application.isEditor && !refreshInEditor)
+                return;
 
             if (string.IsNullOrWhiteSpace(address) || string.IsNullOrEmpty(address))
             {
@@ -68,25 +75,48 @@ namespace LOP
                 instance = Instantiate(prefab, transform);
             }
 
-            if(instance) 
+            if (instance) 
             {
+#if UNITY_EDITOR
+                instance.AddComponent<InstantiateProtection>();
+#endif
+
                 instance.hideFlags |= HideFlags.DontSaveInEditor | HideFlags.DontSaveInBuild | HideFlags.NotEditable;
                 foreach (Transform t in instance.GetComponentsInChildren<Transform>())
                 {
                     t.gameObject.hideFlags = instance.hideFlags;
                 }
+
                 if (setPositionAndRotationToZero)
                 {
                     Transform t = instance.transform;
-                    if (useLocalPositionAndRotation)
+                    if (setPositionToZero)
                     {
-                        t.localPosition = Vector3.zero;
-                        t.localRotation = Quaternion.identity;
+                        if (useLocalPositionAndRotation)
+                        {
+                            t.localPosition = Vector3.zero;
+                        }
+                        else
+                        {
+                            t.position = Vector3.zero;
+                        }
                     }
-                    else
+                    if (setRotationToZero)
                     {
-                        t.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+                        if (useLocalPositionAndRotation)
+                        {
+                            t.localRotation = Quaternion.identity;
+                        }
+                        else
+                        {
+                            t.rotation = Quaternion.identity;
+                        }
                     }
+                }
+
+                if (overrideLocalScale)
+                {
+                    t.localScale = newLocalScale;
                 }
             }
         }
