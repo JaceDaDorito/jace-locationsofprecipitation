@@ -6,7 +6,7 @@
     "url": ""
   },
   "displayName": "LocationsOfPrecipitation",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "unity": "2021.3",
   "description": "A utils mod that features editor and runtime tools I use for making stages!"
 }

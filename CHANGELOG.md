@@ -1,3 +1,9 @@
+**1.2.3**
+- New ``setRotationToZero` attribute in ``InstantiateAddressablePrefab``.
+- ``setPositionToZero`` no longer affects the rotation of the instantiated object.
+- New ``overrideLodcalScale`` and ``newLocalScale`` attributes in ``InstantiateAddressablePrefab``.
+- New protections have been implemented to ensure that there are no dead objects in editor if ``refreshInEditor`` is true.
+
 **1.2.2**
 - Added ``InstantiateArtifactPortal`` and ``InstantiateArtifactFormulaDisplay`` to instatiate objects relating to the artifact teleporter in Stage 5s. Does not come with the actual teleporter props.
 - There was an undocumeted feature called ``PlayerSpawnPointController`` in version ``1.2.1`` that remains untested. Added a note to that changelog.

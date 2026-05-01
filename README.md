@@ -24,3 +24,4 @@ A stage modding toolkit that streamlines addressable asset usability in a scene.
 - Testing and implementation by JaceDaDorito
 - Icon art by JaceDaDorito and IbanPlay
 - Bug fixes and Artifact dialer utils by viliger
+- Bug fixes and InstantiateAddressablePrefab improvements by KingEnderBrine
