@@ -24,6 +24,12 @@ namespace LOP.Editor
             CreateObject(menuCommand, Constants.AssetGUIDS.accessNodeSetupObjectGUID, "AccessNodeHolder");
         }
 
+        [MenuItem("GameObject/Risk Of Rain 2/Wake", false, 10)]
+        static void CreateWake(MenuCommand menuCommand)
+        {
+            CreateObject(menuCommand, Constants.AssetGUIDS.wakePrefabGUID, "Wake");
+        }
+
         static void CreateObject(MenuCommand menuCommand, string GUID, string name)
         {
             var prefab = Constants.AssetGUIDS.QuickLoad<GameObject>(GUID);
