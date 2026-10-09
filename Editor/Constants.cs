@@ -10,6 +10,7 @@ namespace LOP
         {
             public const string geyserPrefabGUID = "be993fbf98b5dbc4198694798de33d7c";
             public const string accessNodeSetupObjectGUID = "8cc9b0fc966150947a8931e8d7e067be";
+            public const string wakePrefabGUID = "ccbb5128cb4eb2343b11a3b1f68e915f";
 
             /// <summary>
             /// Loads an asset of type <typeparamref name="T"/> by using the <paramref name="guid"/> provided
