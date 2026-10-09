@@ -1,3 +1,6 @@
+**1.2.4**
+- New ``Wake`` option under the Risk of Rain 2 prefab creation menu.
+
 **1.2.3**
 - New ``setRotationToZero` attribute in ``InstantiateAddressablePrefab``.
 - ``setPositionToZero`` no longer affects the rotation of the instantiated object.
