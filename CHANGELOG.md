@@ -1,3 +1,7 @@
+**1.2.5**
+- Removed ``WakeSpawner`` from the Wake prefab
+- Fixed the Main Camera address under ``CameraInstantiator``
+
 **1.2.4**
 - New ``Wake`` option under the Risk of Rain 2 prefab creation menu.
 
