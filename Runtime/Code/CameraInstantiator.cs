@@ -10,7 +10,8 @@ namespace LOP
     [ExecuteAlways]
     public class CameraInstantiator : MonoBehaviour
     {
-        public const string CAMERA_ADDRESS = "RoR2/Base/Core/Camera/Main Camera.prefab";
+        //RoR2/Base/Core/Camera/Main Camera.prefab
+        public const string CAMERA_ADDRESS = "55d9d47bebc68734d9e0afdd4d1337ca";
         public GameObject CameraInstance { get => _cameraInstance; private set => _cameraInstance = value; }
         [NonSerialized] private GameObject _cameraInstance;
         private void OnEnable() => Refresh();
