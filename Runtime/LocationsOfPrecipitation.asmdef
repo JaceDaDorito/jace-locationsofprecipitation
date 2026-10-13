@@ -24,7 +24,8 @@
         "System.Security.dll",
         "RoR2BepInExPack.dll",
         "R2API.Prefab.dll",
-        "R2API.Core.dll"
+        "R2API.Core.dll",
+        "R2API.Addressables.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
