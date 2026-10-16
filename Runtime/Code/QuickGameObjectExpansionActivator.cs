@@ -1,10 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Networking;
 using RoR2;
-using RoR2.Navigation;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using RoR2.ExpansionManagement;
 using UnityEngine.AddressableAssets;
 
