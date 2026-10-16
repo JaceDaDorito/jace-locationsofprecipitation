@@ -1,6 +1,8 @@
 **1.2.5**
 - Removed ``WakeSpawner`` from the Wake prefab
 - Fixed the Main Camera address under ``CameraInstantiator``
+- New component called ``QuickGameObjectExpansionActivator`` that handles game expansion locking by cataloging the already existing expansions rather than needing an explicit expansion def.
+- New component called ``DLC4GongSpawner`` that handles gong spawning
 
 **1.2.4**
 - New ``Wake`` option under the Risk of Rain 2 prefab creation menu.
